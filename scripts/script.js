@@ -1,66 +1,34 @@
-//card varibles
-var introEl = document.querySelector("#intro"); 
-var qu1El = document.querySelector("#qu1");
-var qu2El = document.querySelector("#qu2");
-var qu3El = document.querySelector("#qu3");
-var qu4El = document.querySelector("#qu4");
-var qu5El = document.querySelector("#qu5");
-var completeEl = document.querySelector("#complete");
-var highScoreEl = document.querySelector("#highscore");
-//button varibles 
-var startBtn = document.querySelector("#start"); 
-var ans1El = document.querySelector("#ans1"); 
-var ans2El = document.querySelector("#ans2"); 
-var ans3El  = document.querySelector("#ans3"); 
-var ans4El = document.querySelector("#ans4"); 
+/* Varibles Needed:
+position to show current postion 
+number correct 
+var to html: test and test status
+question 
+choice options
+choices 
+for each answer 
 
-//hidden cards to start only intro is showing
-qu1El.style.display = "none";
-qu2El.style.display = "none";
-qu3El.style.display = "none";
-qu4El.style.display = "none";
-qu5El.style.display = "none";
-completeEl.style.display = "none";
-highScoreEl.style.display = "none";
+Array with objects needed:
+    Question: gives the question
+    ans1: gives the answers 
+    ans2
+    ans3
+    ans4
+    answer: gives actual answer to refrence 
 
-//event listeners
-startBtn.addEventListener("click", start);
-ans2El.addEventListener("click", qu1corr);
-ans3El.addEventListener("click");
-ans4El.addEventListener("click");
-//ans2El.addEventListener("click", qu2corr);
 
-//card functions
-function start(event) {
-    if (event.target.matches("button"))
-    event.preventDefault();
-    qu1El.style.display = "block";
-    introEl.style.display ="none";
-}
+function to refrence how to return elements to the document 
 
-function qu1corr(event) {
-    if (event.target.matches("button"))
-    event.preventDefault();
-    qu2El.style.display = "block";
-    qu1El.style.display ="none"; 
-}
+function for rendering the question with the answers
+each answer will be a button linked with an id for a value to match the answer in the array 
 
-//need function for incorrect
-//need a solution if the answers are the same - wont work correct. 
+function to check answer 
 
-//function qu2corr(event) {
-  //  if (event.target.matches("button"))
-    //event.preventDefault();
-   // qu3El.style.display = "block";
-   // qu2El.style.display ="none";
-    //need correct to display 
-//}
-//time starts and qu1 is displayed and intro card is hid
-//qu1 - 5: question answered correct, alert correct, incorrect take time away 
-//when answer is right move on to the next question and hide the previous card
-//after q5 display score; users will enter intials and submit score 
-//score will save to high score page and to local storage once seelcted submit
-//hide that card, then display highscores page 
-//clear scores - erase table of scores stored
-//go back - takes abck to start of quiz intro card 
+re-render question
 
+
+will need a start screen before
+a score page
+a highscore list 
+store to local storage 
+able to clear socres on local storage and navigate back to start 
+*/
