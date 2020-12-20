@@ -7,9 +7,12 @@ var qu4El = document.querySelector("#qu4");
 var qu5El = document.querySelector("#qu5");
 var completeEl = document.querySelector("#complete");
 var highScoreEl = document.querySelector("#highscore");
-
 //button varibles 
 var startBtn = document.querySelector("#start"); 
+var ans1El = document.querySelector("#ans1"); 
+var ans2El = document.querySelector("#ans2"); 
+var ans3El  = document.querySelector("#ans3"); 
+var ans4El = document.querySelector("#ans4"); 
 
 //hidden cards to start only intro is showing
 qu1El.style.display = "none";
@@ -20,16 +23,38 @@ qu5El.style.display = "none";
 completeEl.style.display = "none";
 highScoreEl.style.display = "none";
 
-//when start button is clicked
-startBtn.addEventListener("click", qu1);
+//event listeners
+startBtn.addEventListener("click", start);
+ans2El.addEventListener("click", qu1corr);
+ans3El.addEventListener("click");
+ans4El.addEventListener("click");
+//ans2El.addEventListener("click", qu2corr);
 
-function qu1(event) {
+//card functions
+function start(event) {
     if (event.target.matches("button"))
     event.preventDefault();
     qu1El.style.display = "block";
     introEl.style.display ="none";
 }
 
+function qu1corr(event) {
+    if (event.target.matches("button"))
+    event.preventDefault();
+    qu2El.style.display = "block";
+    qu1El.style.display ="none"; 
+}
+
+//need function for incorrect
+//need a solution if the answers are the same - wont work correct. 
+
+//function qu2corr(event) {
+  //  if (event.target.matches("button"))
+    //event.preventDefault();
+   // qu3El.style.display = "block";
+   // qu2El.style.display ="none";
+    //need correct to display 
+//}
 //time starts and qu1 is displayed and intro card is hid
 //qu1 - 5: question answered correct, alert correct, incorrect take time away 
 //when answer is right move on to the next question and hide the previous card
@@ -38,3 +63,4 @@ function qu1(event) {
 //hide that card, then display highscores page 
 //clear scores - erase table of scores stored
 //go back - takes abck to start of quiz intro card 
+
