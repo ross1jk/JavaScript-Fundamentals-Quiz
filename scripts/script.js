@@ -32,3 +32,46 @@ a highscore list
 store to local storage 
 able to clear socres on local storage and navigate back to start 
 */
+
+var questions = [
+    {
+      question: "Commonly used data types DO NOT include:",
+      ans1: "1. strings",
+      ans2: "2. booleans",
+      ans3: "3. alerts",
+      ans4: "4. numbers",
+      answer: "3",
+    },
+    {
+      question: "The condition in an if / else statement is enclosed within ______.",
+      ans1: "1. quotes",
+      ans2: "2. curly brackets",
+      ans3: "3. parentheses",
+      ans4: "4. square brackets",
+      answer: "2"
+    },
+    {
+      question: "Arrays in JavaScript can be used to store ______.",
+      ans1: "1. numbers and strings",
+      ans2: "2. other arrays",
+      ans3: "3. booleans",
+      ans4: "4. all of the above",
+      answer: "4" 
+    },
+    {
+      question: "String values must be enclosed within ______ when being assigned to variables.",
+      ans1: "1. commas",
+      ans2: "2. curly brackets",
+      ans3: "3. quotes",
+      ans4: "4. parentheses",
+      answer: "3",
+    },
+    {
+      question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+      ans1: "1. JavaScript",
+      ans2: "2. Terminal/Bash",
+      ans3: "3. for loops",
+      ans4: "4. console.log",
+      answer: "1", 
+    }
+  ];
