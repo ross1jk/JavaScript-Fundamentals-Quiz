@@ -109,8 +109,9 @@ function renderQuestion(){
     if (choice == question[pos].answer){
       correct++;
     }
-    else{
-    correct--; 
+    else{ 
+        (timeleft = timeleft - 20); 
+        get("countdown").innerHTML = "Time: " +timeleft;
     }
     pos++;
     renderQuestion(); 
