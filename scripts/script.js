@@ -4,8 +4,6 @@ var pos = 0;
 var correct = 0; 
 //test question
 var test;
-//test answers area
-var testStatus; 
 //will refrence my question and choices
 var question; 
 var choice; 
@@ -58,6 +56,44 @@ var questions = [
       answer: "1", 
     }
   ];
+
+//Function created so I dont have to write getElementById a bunch of times
+function get (x) {
+    return document.getElementById(x); 
+  }
+
+//Getting my quiz in the correct order and linking the answers to varibles 
+function renderQuestion(){
+    test = get("test");
+    if(pos >= questions.length){
+      test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
+      // resets the variable to allow users to restart the test
+      pos = 0;
+      correct = 0;
+      // stops rest of renderQuestion function running when test is completed
+      return false;
+    }
+    
+    question = questions[pos].question;
+    uAns1 = questions[pos].ans1;
+    uAns2 = questions[pos].ans2;
+    uAns3 = questions[pos].ans3;
+    uAns4 = questions[pos].ans4;
+    // display the question
+    test.innerHTML = "<h3>"+question+"</h3>";
+    // display the answer options
+    //this.id calls out the button value inside the check answer function. 
+    //id='x' matches the answer: x in the object to check 
+    //uAns1 - gives the visual of what the answer is, but the id assigns the value to that button 
+    test.innerHTML += "<button onclick='checkAnswer(this.id)' id='1'>" +uAns1+ "</button><br>"; 
+    test.innerHTML += "<button onclick='checkAnswer(this.id)' id='2'>" +uAns2+ "</button><br>"; 
+    test.innerHTML += "<button onclick='checkAnswer(this.id)' id='3'>" +uAns3+ "</button><br>"; 
+    test.innerHTML += "<button onclick='checkAnswer(this.id)' id='4'>" +uAns4+ "</button>"; 
+  }
+  
+  // Add event listener to call renderQuestion on page load event
+  window.addEventListener("load", renderQuestion);
+  
 
 /* Varibles Needed:
 position to show current postion 
