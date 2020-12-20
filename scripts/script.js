@@ -57,10 +57,22 @@ var questions = [
     }
   ];
 
+
 //Function created so I dont have to write getElementById a bunch of times
 function get (x) {
     return document.getElementById(x); 
   }
+//countdown to be modfiied 
+  var timeleft = 100;
+  var downloadTimer = setInterval(function(){
+    if(timeleft <= 0){
+      clearInterval(downloadTimer);
+      get("countdown").innerHTML = "Fail";
+    } else {
+      get("countdown").innerHTML = "Time: " +timeleft;
+    }
+    timeleft -= 1;
+  }, 1000);
 
 //Getting my quiz in the correct order and linking the answers to varibles 
 function renderQuestion(){
