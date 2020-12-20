@@ -85,12 +85,12 @@ function renderQuestion(){
     //this.id calls out the button value inside the check answer function. 
     //id='x' matches the answer: x in the object to check 
     //uAns1 - gives the visual of what the answer is, but the id assigns the value to that button 
-    test.innerHTML += "<button onclick='checkAnswer(this.id)' id='1'>" +uAns1+ "</button><br>"; 
-    test.innerHTML += "<button onclick='checkAnswer(this.id)' id='2'>" +uAns2+ "</button><br>"; 
-    test.innerHTML += "<button onclick='checkAnswer(this.id)' id='3'>" +uAns3+ "</button><br>"; 
-    test.innerHTML += "<button onclick='checkAnswer(this.id)' id='4'>" +uAns4+ "</button>"; 
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='1'>" +uAns1+ "</button><br>"; 
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='2'>" +uAns2+ "</button><br>"; 
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='3'>" +uAns3+ "</button><br>"; 
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='4'>" +uAns4+ "</button>"; 
   }
-  
+ 
     //this checks whatever button was clicked value and provides a response based on array/object positions 
     function checkAnswer (clicked_id){
     choice = clicked_id;
