@@ -91,6 +91,19 @@ function renderQuestion(){
     test.innerHTML += "<button onclick='checkAnswer(this.id)' id='4'>" +uAns4+ "</button>"; 
   }
   
+    //this checks whatever button was clicked value and provides a response based on array/object positions 
+    function checkAnswer (clicked_id){
+    choice = clicked_id;
+    if (choice == question[pos].answer){
+      correct++;
+    }
+    else{
+    correct--; 
+    }
+    pos++;
+    renderQuestion(); 
+  }
+
   // Add event listener to call renderQuestion on page load event
   window.addEventListener("load", renderQuestion);
   
