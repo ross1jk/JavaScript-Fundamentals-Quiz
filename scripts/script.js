@@ -2,7 +2,7 @@
 var pos = 0; 
 //stores answers correct 
 var correct = 0; 
-//test question
+//test question and answer
 var test;
 //will refrence my question and choices
 var question; 
@@ -80,15 +80,15 @@ function renderQuestion(){
     uAns3 = questions[pos].ans3;
     uAns4 = questions[pos].ans4;
     // display the question
-    test.innerHTML = "<h3>"+question+"</h3>";
+    test.innerHTML = "<h3>"+question+"</h3><br><br>";
     // display the answer options
     //this.id calls out the button value inside the check answer function. 
     //id='x' matches the answer: x in the object to check 
     //uAns1 - gives the visual of what the answer is, but the id assigns the value to that button 
-    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='1'>" +uAns1+ "</button><br>"; 
-    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='2'>" +uAns2+ "</button><br>"; 
-    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='3'>" +uAns3+ "</button><br>"; 
-    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='4'>" +uAns4+ "</button>"; 
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='1'>" +uAns1+ "</button><br><br>"; 
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='2'>" +uAns2+ "</button><br><br>"; 
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='3'>" +uAns3+ "</button><br><br>"; 
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='4'>" +uAns4+ "</button><br>"; 
   }
  
     //this checks whatever button was clicked value and provides a response based on array/object positions 
