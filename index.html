@@ -20,18 +20,39 @@
      
     </div>
     <div class="col-8">
- <form class="card">
-  <section class="container">
-
-    <section class="row">
-       <div class="col-12">
+     <!--My Start Card-->
+    <form class="card" id="intro">
+      <section class="container">
+        <header class="card-header bg-transparent">
+          <section class="row">
+            <div class="col-12">
+              <h1>Coding Quiz Challenge</h1>
+            </div>
+          </section>
+        </header>
+        <form class="card-body">
+          <section class="row">
+            <div class="col-12">
+              <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalise your score/time by ten seconds!</p>
+             <button type="button" class="btn btn-info" id="start">Start Quiz</button>
+            </div>
+          </section>
+        </form>
+      </section>
+    </form>
  
-          <div id="test"></div>
-      
-        </div>
-     </section>
-   </section>
-  </form>
+     <!--Card that contains all of my questions-->
+    <form class="card">
+    <section class="container">
+      <section class="row">
+        <div class="col-12">
+  
+            <div id="test"></div>
+        
+          </div>
+      </section>
+    </section>
+    </form>
 
  </main>
  <script src="./scripts/script.js"></script>
