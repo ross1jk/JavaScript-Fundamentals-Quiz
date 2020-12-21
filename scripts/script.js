@@ -63,6 +63,21 @@ var questions = [
 function get (x) {
     return document.getElementById(x); 
   }
+
+//when start button is clicked
+get("test").style.display = "none"; //hidden question card 
+var startBtn = get("start"); 
+startBtn.addEventListener("click", testEvent); 
+function testEvent(event) {
+    if (event.target.matches("button"))
+    event.preventDefault();
+    get("test").style.display="block";
+    //start time
+    //start other function 
+    get("intro").style.display ="none"; 
+    console.log("goodjob");
+}
+
 //countdown to be modfiied 
   var timeleft = 100;
   var downloadTimer = setInterval(function(){
@@ -82,7 +97,7 @@ function renderQuestion(){
       // resets the variable to allow users to restart the test
       clearInterval(downloadTimer);
       get("countdown").innerHTML = "Time: " +timeleft;
-      test.innerHTML = "<h2>Your score is: </h2>" +timeleft + "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
+      test.innerHTML = "<h2>Your score is: " +timeleft + "You got "+correct+" of "+questions.length+" questions correct</h2>";
       pos = 0;
       correct = 0;
       // stops rest of renderQuestion function running when test is completed
@@ -123,6 +138,7 @@ function renderQuestion(){
     renderQuestion(); 
   }
  
+
   // Add event listener to call renderQuestion on page load event
   window.addEventListener("load", renderQuestion);
   
