@@ -97,7 +97,7 @@ function renderQuestion(){
       // resets the variable to allow users to restart the test
       clearInterval(downloadTimer);
       get("countdown").innerHTML = "Time: " +timeleft;
-      test.innerHTML = "<h2>Your score is: " +timeleft + "You got "+correct+" of "+questions.length+" questions correct</h2>";
+      test.innerHTML = "<h2>Your score is: " +timeleft + "You got "+correct+" of "+questions.length+" questions correct</h2> <br> <form action='./highscores.html'><label for='Initials'>Enter Initials:  </label><input type='text' id='intials'><input type='submit' value='Submit'></form>";
       pos = 0;
       correct = 0;
       // stops rest of renderQuestion function running when test is completed
