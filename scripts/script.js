@@ -2,6 +2,7 @@
 var pos = 0; 
 //stores answers correct 
 var correct = 0; 
+var score = timeleft;
 //test question and answer
 var test;
 //will refrence my question and choices
@@ -45,7 +46,7 @@ var questions = [
       ans2: "2. curly brackets",
       ans3: "3. quotes",
       ans4: "4. parentheses",
-      answer: "3",
+      answer: "3"
     },
     {
       question: "A very useful tool used during development and debugging for printing content to the debugger is:",
@@ -53,10 +54,10 @@ var questions = [
       ans2: "2. Terminal/Bash",
       ans3: "3. for loops",
       ans4: "4. console.log",
-      answer: "1", 
+      answer: "1"
     }
   ];
-
+ 
 
 //Function created so I dont have to write getElementById a bunch of times
 function get (x) {
@@ -73,13 +74,15 @@ function get (x) {
     }
     timeleft -= 1;
   }, 1000);
-
+ 
 //Getting my quiz in the correct order and linking the answers to varibles 
 function renderQuestion(){
     test = get("test");
     if(pos >= questions.length){
-      test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
       // resets the variable to allow users to restart the test
+      clearInterval(downloadTimer);
+      get("countdown").innerHTML = "Time: " +timeleft;
+      test.innerHTML = "<h2>Your score is: </h2>" +timeleft + "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
       pos = 0;
       correct = 0;
       // stops rest of renderQuestion function running when test is completed
@@ -106,17 +109,20 @@ function renderQuestion(){
     //this checks whatever button was clicked value and provides a response based on array/object positions 
     function checkAnswer (clicked_id){
     choice = clicked_id;
-    if (choice == question[pos].answer){
+    if (choice == questions[pos].answer){
       correct++;
     }
     else{ 
-        (timeleft = timeleft - 20); 
-        get("countdown").innerHTML = "Time: " +timeleft;
+    //  correct--;
+      (timeleft = timeleft - 20); 
+      get("countdown").innerHTML = "Time: " +timeleft;
     }
+    //alert(questions[pos].answer);
     pos++;
+    console.log(correct);
     renderQuestion(); 
   }
-
+ 
   // Add event listener to call renderQuestion on page load event
   window.addEventListener("load", renderQuestion);
   
