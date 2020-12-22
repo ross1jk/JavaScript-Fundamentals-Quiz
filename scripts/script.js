@@ -2,7 +2,9 @@
 var pos = 0; 
 //stores answers correct 
 var correct = 0; 
+var timeleft; 
 var score = timeleft;
+var downloadTimer; 
 //test question and answer
 var test;
 //will refrence my question and choices
@@ -64,32 +66,30 @@ function get (x) {
     return document.getElementById(x); 
   }
 
-//when start button is clicked
-get("test").style.display = "none"; //hidden question card 
-var startBtn = get("start"); 
-startBtn.addEventListener("click", testEvent); 
+//Function to trigger on start 
+function startTimer(){
+  //countdown to be modfiied 
+   timeleft = 100;
+    downloadTimer = setInterval(function(){
+      if(timeleft <= 0){
+        clearInterval(downloadTimer);
+        get("countdown").innerHTML = "Fail";
+      } else {
+        get("countdown").innerHTML = "Time: " +timeleft;
+      }
+      timeleft -= 1;
+    }, 1000);
+  }
+
+
 function testEvent(event) {
     if (event.target.matches("button"))
     event.preventDefault();
     get("test").style.display="block";
-    //start time
-    //start other function 
-    get("intro").style.display ="none"; 
-    console.log("goodjob");
+    get("intro").style.display ="none";
+    startTimer();
 }
 
-//countdown to be modfiied 
-  var timeleft = 100;
-  var downloadTimer = setInterval(function(){
-    if(timeleft <= 0){
-      clearInterval(downloadTimer);
-      get("countdown").innerHTML = "Fail";
-    } else {
-      get("countdown").innerHTML = "Time: " +timeleft;
-    }
-    timeleft -= 1;
-  }, 1000);
- 
 //Getting my quiz in the correct order and linking the answers to varibles 
 function renderQuestion(){
     test = get("test");
@@ -97,7 +97,7 @@ function renderQuestion(){
       // resets the variable to allow users to restart the test
       clearInterval(downloadTimer);
       get("countdown").innerHTML = "Time: " +timeleft;
-      test.innerHTML = "<h2>Your score is: " +timeleft + "You got "+correct+" of "+questions.length+" questions correct</h2> <br> <form action='./highscores.html'><label for='Initials'>Enter Initials:  </label><input type='text' id='intials'><input type='submit' value='Submit'></form>";
+      test.innerHTML = "<h2>Your score is: " +timeleft + "<br> "+correct+" of "+questions.length+" questions correct</h2> <br> <form action=''><label for='Initials'>Enter Initials and Score: </label><input type='text' id='intials'><input type='submit' value='Submit'></form>";
       pos = 0;
       correct = 0;
       // stops rest of renderQuestion function running when test is completed
@@ -140,10 +140,20 @@ function renderQuestion(){
  
 
   // Add event listener to call renderQuestion on page load event
+  //when start button is clicked
+  get("test").style.display = "none"; //hidden question card 
+  var startBtn = get("start"); 
+  startBtn.addEventListener("click", testEvent);
   window.addEventListener("load", renderQuestion);
-  
 
-/* Varibles Needed:
+  
+  /*function highscore (){
+    //xyz.preventDefault();
+    
+    get("intro").style.display ="none";  
+    get("highscore").style.display="block";
+  }
+Varibles Needed:
 position to show current postion 
 number correct 
 var to html: test and test status
