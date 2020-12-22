@@ -85,23 +85,21 @@ function startTimer(){
 function testEvent(event) {
     if (event.target.matches("button"))
     event.preventDefault();
-    get("test").style.display="block";
+    get("questionbox").style.display="block";
     get("intro").style.display="none";
     startTimer();
 }
 //its reading this function, its jut not working how I want it to when I click submit on that form. need to work on that. 
-function highscore (clicked_id){
-  final = clicked_id
+function highscore() {
   console.log("Jac this is working")
   if (clicked_id === true){
   get("name").innerHTML = final; 
   preventDefault();
   get("highscorescard").style.display="block";
   get("intro").style.display="none"; 
-  get("test").style.display="none";
+  get("questionbox").style.display="none";
   }
 }
-
 //Getting my quiz in the correct order and linking the answers to varibles 
 function renderQuestion(){
     test = get("test");
@@ -112,11 +110,10 @@ function renderQuestion(){
       test.innerHTML = "<h2>Your score is: " +timeleft + "<br> "+correct+" of "+questions.length+" questions correct</h2> <br> <form action='script.js' onsubmit='highscore(this.id)'><label for='Initials'>Enter Initials and Score: </label><input type='text' id='intials'><input type='submit' value='Submit'></form>";
       pos = 0;
       correct = 0;
-      highscore();
       // stops rest of renderQuestion function running when test is completed
       return false;
     }
-    
+    //These match up to my array
     question = questions[pos].question;
     uAns1 = questions[pos].ans1;
     uAns2 = questions[pos].ans2;
@@ -124,7 +121,7 @@ function renderQuestion(){
     uAns4 = questions[pos].ans4;
     // display the question
     test.innerHTML = "<h3>"+question+"</h3><br><br>";
-    // display the answer options
+    //Display the answer options
     //this.id calls out the button value inside the check answer function. 
     //id='x' matches the answer: x in the object to check 
     //uAns1 - gives the visual of what the answer is, but the id assigns the value to that button 
@@ -152,7 +149,7 @@ function renderQuestion(){
   }
 
 
-  get("test").style.display = "none";//hidden questions card 
+  get("questionbox").style.display = "none";//hidden questions card 
   get("highscorescard").style.display="none";//hidden highscores card 
   
   var startBtn = get("start"); 
