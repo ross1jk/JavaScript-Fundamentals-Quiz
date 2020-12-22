@@ -86,8 +86,20 @@ function testEvent(event) {
     if (event.target.matches("button"))
     event.preventDefault();
     get("test").style.display="block";
-    get("intro").style.display ="none";
+    get("intro").style.display="none";
     startTimer();
+}
+//its reading this function, its jut not working how I want it to when I click submit on that form. need to work on that. 
+function highscore (clicked_id){
+  final = clicked_id
+  console.log("Jac this is working")
+  if (clicked_id === true){
+  get("name").innerHTML = final; 
+  preventDefault();
+  get("highscorescard").style.display="block";
+  get("intro").style.display="none"; 
+  get("test").style.display="none";
+  }
 }
 
 //Getting my quiz in the correct order and linking the answers to varibles 
@@ -97,9 +109,10 @@ function renderQuestion(){
       // resets the variable to allow users to restart the test
       clearInterval(downloadTimer);
       get("countdown").innerHTML = "Time: " +timeleft;
-      test.innerHTML = "<h2>Your score is: " +timeleft + "<br> "+correct+" of "+questions.length+" questions correct</h2> <br> <form action=''><label for='Initials'>Enter Initials and Score: </label><input type='text' id='intials'><input type='submit' value='Submit'></form>";
+      test.innerHTML = "<h2>Your score is: " +timeleft + "<br> "+correct+" of "+questions.length+" questions correct</h2> <br> <form action='script.js' onsubmit='highscore(this.id)'><label for='Initials'>Enter Initials and Score: </label><input type='text' id='intials'><input type='submit' value='Submit'></form>";
       pos = 0;
       correct = 0;
+      highscore();
       // stops rest of renderQuestion function running when test is completed
       return false;
     }
@@ -137,22 +150,17 @@ function renderQuestion(){
     console.log(correct);
     renderQuestion(); 
   }
- 
 
-  // Add event listener to call renderQuestion on page load event
-  //when start button is clicked
-  get("test").style.display = "none"; //hidden question card 
+
+  get("test").style.display = "none";//hidden questions card 
+  get("highscorescard").style.display="none";//hidden highscores card 
+  
   var startBtn = get("start"); 
   startBtn.addEventListener("click", testEvent);
   window.addEventListener("load", renderQuestion);
 
   
-  /*function highscore (){
-    //xyz.preventDefault();
-    
-    get("intro").style.display ="none";  
-    get("highscore").style.display="block";
-  }
+  /*
 Varibles Needed:
 position to show current postion 
 number correct 
