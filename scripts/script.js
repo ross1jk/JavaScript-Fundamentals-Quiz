@@ -118,6 +118,76 @@ function highscoreDisplay(){
     // return true;
   }
 
+
+  //my highscore storage functions
+  var highScoreInput = document.querySelector("#highScore-text");
+  var highScoreForm = document.querySelector("#highScore-form");
+  var highScoreList = document.querySelector("#highScore-list");
+  var highScoresSpan = document.querySelector("#highScore-count");
+  var highScores = [];
+  
+  init();
+  
+    function renderHighScore() {
+    // Clear todoList element and update todoCountSpan
+    highScoreList.innerHTML = "";
+    highScoresSpan.textContent = highScores.length;
+  
+    // Render a new li for each todo
+      for (var i = 0; i < highScores.length; i++) {
+      var highScore = highScores[i];
+  
+      var li = document.createElement("li");
+      li.textContent = highScore;
+      li.setAttribute("data-index", i);
+  
+      var button = document.createElement("button");
+      button.textContent = "Clear Name";
+  
+      li.appendChild(button);
+      highScoreList.appendChild(li);
+    }
+  }
+  
+  function init() {
+    var storedhighScore = JSON.parse(localStorage.getItem("highScore"));
+    if (storedhighScore !== null) {
+      highScore = storedhighScore;
+    }
+    renderHighScore();
+  }
+  
+  function storeHighScore() {
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+  }
+  
+  document.querySelector("#highScore-text").addEventListener("submit", function(event) {
+    event.preventDefault();
+  
+    var highScoreText = highScoreInput.value.trim();
+    if (highScoreText === "") {
+      return;
+    }
+  
+    highScores.push(highScoreText);
+    highScoreInput.value = "";
+    storeHighScore();
+    renderHighScore();
+  });
+  
+  highScoreList.addEventListener("click", function(event) {
+    var element = event.target
+  
+  if (element.matches("button") === true) {
+    var index = element.parentElement.getAttribute("data-index");
+     highScores.splice(index, 1);
+    storeHighScore();
+    renderHighScore();
+   }
+  });
+
+
+
 //Getting my quiz in the correct order and linking the answers to varibles 
 function renderQuestion(){
     test = get("test");
