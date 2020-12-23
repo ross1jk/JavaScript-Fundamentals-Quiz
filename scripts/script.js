@@ -95,16 +95,6 @@ function backEvent(event) {
   window.location.reload();
 }
 
-//function to clear highscore list 
-function clearEvent(event) {
-  event.preventDefault();
-  localStorage.clear();
-  get("name").innerHTML = localStorage.getItem("lastname");
-  get("highscorescard").style.display="block";
-  get("intro").style.display="none";
-  get("questionbox").style.display="none";
-}
-
 //score button prep
 var submitScore = document.createElement("INPUT");
 submitScore.setAttribute("type", "submit");
@@ -119,18 +109,16 @@ function highscoreDisplay(){
 
 //this is storing my scores and is supposed to bring me to my highscore form my question card
   function highscore() {
-    alert("Submit button clicked!");
-    
     //This is putting my form input and the time left value together which is needed for my display form 
     var highscoreNames ={
       User: get("inlineFormInput").value.trim(),
       score: timeleft
     }  
     //setting name and score to local storage 
-    localStorage.setItem("highscoreLeaderboard", JSON.stringify(highscoreNames.User) + JSON.stringify(highscoreNames.score)); 
+    localStorage.setItem("highscoreLeaderboard", highscoreNames.User +" - "+ JSON.stringify(highscoreNames.score)); 
     
     //grabs one the name and score from local storage
-    liDoc.textContent = localStorage.getItem("highscoreLeaderboard", JSON.stringify(highscoreNames.User) +" - "+ JSON.stringify(highscoreNames.score));
+    liDoc.textContent = localStorage.getItem("highscoreLeaderboard", highscoreNames.User +" - "+ JSON.stringify(highscoreNames.score));
 
     // Appends all the scores as list elements
    /* for (var i = 0; i < displayHighScore.length; i++) {
@@ -143,6 +131,7 @@ function highscoreDisplay(){
      //liDoc is new var for the setting to the page 
     
     highscoreDisplay();   
+
   }
 
 //Getting my quiz in the correct order and linking the answers to varibles
@@ -214,9 +203,15 @@ function renderQuestion(){
   
   
   var liDoc = document.getElementById("nameappend");
-  
-  //var clearButton = document.getElementById("clear", clearScores());
-
+   //function to clear highscore list 
+  var clearButton = document.getElementById("clear", function (event) {
+      event.preventDefault();
+      localStorage.clear();
+      get("nameappend").innerHTML = localStorage.getItem("highscoreLeaderboard");
+      get("highscorescard").style.display="block";
+      get("intro").style.display="none";
+      get("questionbox").style.display="none";
+    }) 
 /*
 Varibles Needed:
 position to show current postion
