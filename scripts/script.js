@@ -117,32 +117,32 @@ function highscoreDisplay(){
   clearInterval(downloadTimer);
 }
 
-//this is storing my scores and bringing me to highscore form my question card
+//this is storing my scores and is supposed to bring me to my highscore form my question card
   function highscore() {
     alert("Submit button clicked!");
     
-    //making my name and score an object 
-    var highscoreNames = get("inlineFormInput").value.trim() +timeleft
-    
+    //This is putting my form input and the time left value together which is needed for my display form 
+    var highscoreNames ={
+      User: get("inlineFormInput").value.trim(),
+      score: timeleft
+    }  
     //setting name and score to local storage 
-    localStorage.setItem("highscoreLeaders", highscoreNames); 
+    localStorage.setItem("highscoreLeaderboard", JSON.stringify(highscoreNames)); 
     
-   // function renderhighscoreLeaders(){
-     // .innerhtml = "";
-      //.textContent = .length; 
-   // }
-    //grabs all the names and scores from local storage
-   // for (var i=0; i<localstroage.length; i++) {
-     // var key = localStorage.key(i);
-      
-      li.textContent = localStorage.getItem("highscoreLeaders", highscoreNames);  
-      li.setAttribute(highscoreNames);
-     // var value =localStorage[key]; 
-     // alert(key + " => " + value);
-     // get("name").innerHTML = key; 
-     // get("nameappend").innerHTML = value; 
+    //grabs one the name and score from local storage
+    liDoc.textContent = localStorage.getItem("highscoreLeaderboard", JSON.stringify(highscoreNames.User) +" - "+ JSON.stringify(highscoreNames.score));
+
+    // Appends all the scores as list elements
+   /* for (var i = 0; i < displayHighScore.length; i++) {
+        var li = document.createElement('li');
+        li.textContent = highscoreNames; 
+        li.setAttribute = ("data-index", i); 
+        li.appendChild(liDoc); 
+    } */
     
-    highscoreDisplay();    
+     //liDoc is new var for the setting to the page 
+    
+    highscoreDisplay();   
   }
 
 //Getting my quiz in the correct order and linking the answers to varibles
@@ -213,7 +213,7 @@ function renderQuestion(){
   var highscoreList = document.getElementById("highsorelist");
   
   
-  var li = document.getElementById("nameappend");
+  var liDoc = document.getElementById("nameappend");
   
   //var clearButton = document.getElementById("clear", clearScores());
 
