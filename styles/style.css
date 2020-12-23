@@ -16,6 +16,10 @@ ul {
   }
 /* list element styling so it stands out */
 li {
-    background-color: #e7dbe0;
+    background-color: #e0f2f1;
     font-size: 25px;
+}
+/* heading styling for visual appeal */ 
+h1 {
+    color: #009c9d;
 }

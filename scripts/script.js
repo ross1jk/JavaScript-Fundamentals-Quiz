@@ -127,7 +127,7 @@ function highscoreDisplay(){
       score: timeleft
     }  
     //setting name and score to local storage 
-    localStorage.setItem("highscoreLeaderboard", JSON.stringify(highscoreNames)); 
+    localStorage.setItem("highscoreLeaderboard", JSON.stringify(highscoreNames.User) + JSON.stringify(highscoreNames.score)); 
     
     //grabs one the name and score from local storage
     liDoc.textContent = localStorage.getItem("highscoreLeaderboard", JSON.stringify(highscoreNames.User) +" - "+ JSON.stringify(highscoreNames.score));
