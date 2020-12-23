@@ -89,17 +89,35 @@ function testEvent(event) {
     get("intro").style.display="none";
     startTimer();
 }
-//its reading this function, its jut not working how I want it to when I click submit on that form. need to work on that. 
-function highscore() {
-  console.log("Jac this is working")
-  if (clicked_id === true){
-  get("name").innerHTML = final; 
-  preventDefault();
+
+//score button prep
+var submitScore = document.createElement("INPUT");
+submitScore.setAttribute("type", "submit");
+
+
+function highscoreDisplay(){
   get("highscorescard").style.display="block";
   get("intro").style.display="none"; 
-  get("questionbox").style.display="none";
-  }
+  get("questionbox").style.display="none"; 
+  clearInterval(downloadTimer);
 }
+
+
+  //its reading this function, its jut not working how I want it to when I click submit on that form. need to work on that. 
+  function highscore() {
+    console.log("Jac this is working");
+    alert("Submit button clicked!");
+    alert()
+  
+   // if (clicked_id === true){
+   // get("name").innerHTML = final; 
+    // get("highscorescard").style.display="block";
+    // get("intro").style.display="none"; 
+    // get("questionbox").style.display="none";
+   
+    // return true;
+  }
+
 //Getting my quiz in the correct order and linking the answers to varibles 
 function renderQuestion(){
     test = get("test");
@@ -107,7 +125,7 @@ function renderQuestion(){
       // resets the variable to allow users to restart the test
       clearInterval(downloadTimer);
       get("countdown").innerHTML = "Time: " +timeleft;
-      test.innerHTML = "<h2>Your score is: " +timeleft + "<br> "+correct+" of "+questions.length+" questions correct</h2> <br> <form action='script.js' onsubmit='highscore(this.id)'><label for='Initials'>Enter Initials and Score: </label><input type='text' id='intials'><input type='submit' value='Submit'></form>";
+      test.innerHTML = "<h2>Your score is: " +timeleft + "<br> "+correct+" of "+questions.length+" questions correct</h2><br><form id='submitScore'><div class='form-row align-items-center'><div class='col-auto'><label class='sr-only' for='inlineFormInput'>Enter Initials: </label><input type='text' class='form-control mb-2' id='inlineFormInput'></div><div class='col-auto'><button type='submit' class='btn btn-primary mb-2' id='submitBtn' onclick='highscore()'>Submit</button></div></div></form>"
       pos = 0;
       correct = 0;
       // stops rest of renderQuestion function running when test is completed
@@ -148,16 +166,26 @@ function renderQuestion(){
     renderQuestion(); 
   }
 
-
-  get("questionbox").style.display = "none";//hidden questions card 
+  
+  get("questionbox").style.display="none";//hidden questions card 
   get("highscorescard").style.display="none";//hidden highscores card 
   
+  var gobackBtn = get("goback");
+
   var startBtn = get("start"); 
   startBtn.addEventListener("click", testEvent);
   window.addEventListener("load", renderQuestion);
 
-  
-  /*
+  //will need to be pulled from submit
+  var highscoreCard = document.getElementById("higscorecard");
+  var highscoreList = document.getElementById("highsorelist");
+  var clearButton = document.getElementById("clear", clearScores());
+  function clearScores() {
+    if (clearButton === true){
+      highscoreInput.appendChild(td)=" ";
+    }
+  };
+/*
 Varibles Needed:
 position to show current postion 
 number correct 

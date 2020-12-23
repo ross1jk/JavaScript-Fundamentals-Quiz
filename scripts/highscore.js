@@ -1,29 +1,76 @@
-var highScoreInput = document.querySelector("#highscore-text");
-var highScoreForm = document.querySelector("#highscore-form");
-var todoList = document.querySelector("#todo-list");
-var todoCountSpan = document.querySelector("#todo-count");
 
-var todos = ["Learn HTML", "Learn CSS", "Learn JavaScript"];
+/*var todoCountSpan = document.querySelector("#todo-count");
 
-renderTodos();
+var scores = [];
 
-function renderTodos() {
+//init();
+
+
+
+//function renderTodos() {
   // Clear todoList element and update todoCountSpan
-  todoList.innerHTML = "";
-  todoCountSpan.textContent = todos.length;
+   todoList.innerHTML = "";
+  //todoCountSpan.textContent = todos.length;
 
-  // Render a new li for each todo
-  for (var i = 0; i < todos.length; i++) {
-    var todo = todos[i];
+  //Render a new li for each todo will need this based on submit 
 
-    var li = document.createElement("li");
-    li.textContent = todo;
-    todoList.appendChild(li);
+    
+    button.textContent = "Complete";
+
+  //}
+
+
+function init() {
+  // Get stored todos from localStorage
+  // Parsing the JSON string to an object
+  var storedScores = JSON.parse(localStorage.getItem(""));
+
+  // If todos were retrieved from localStorage, update the todos array to it
+  if (storedScores !== null) {
+    scores = storedScores;
   }
+
+  // Render todos to the DOM
+  renderTodos();
 }
 
- highscoreForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-    todos.push(highScoreInput.value); //taking the input from what users enter and pushing int into the array
-    renderTodos(); //calling the function above with new updated values
- });
+function storeTodos() {
+  // Stringify and set "todos" key in localStorage to todos array
+  localStorage.setItem("scores", JSON.stringify(scores));
+}
+
+// When form is submitted...
+//todoForm.addEventListener("submit", function(event) {
+  //event.preventDefault();
+
+  var highscoreText = highscoreInput.value.trim();
+
+  // Return from function early if submitted todoText is blank
+  if (todoText === "") {
+    return;
+  }
+
+  // Add new todoText to todos array, clear the input
+  scores.push(highScoreInput);
+  highScoreInput.value = "";
+
+  // Store updated todos in localStorage, re-render the list
+  storeScores();
+  renderScores();
+});
+
+// When a element inside of the todoList is clicked...
+todoList.addEventListener("click", function(event) {
+  var element = event.target;
+
+  // If that element is a button...
+  if (element.matches("button") === true) {
+    // Get its data-index value and remove the todo element from the list
+    var index = element.parentElement.getAttribute("data-index");
+    todos.splice(index, 1);
+
+    // Store updated todos in localStorage, re-render the list
+    storeTodos();
+    renderTodos();
+  }
+});

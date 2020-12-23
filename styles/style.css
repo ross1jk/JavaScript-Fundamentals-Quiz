@@ -7,4 +7,15 @@
 .row {
     margin-top: 15px;
     margin-bottom: 15px;
-} 
+}
+
+ul {
+    list-style-type: none; /* Remove bullets from list */
+    padding: 0; /* Remove padding from list */
+    margin: 0; /* Remove margins from list  */
+  }
+/* list element styling so it stands out */
+li {
+    background-color: #e7dbe0;
+    font-size: 25px;
+}
