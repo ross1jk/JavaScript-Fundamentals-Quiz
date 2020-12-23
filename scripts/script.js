@@ -32,7 +32,7 @@ var questions = [
       ans2: "2. curly brackets",
       ans3: "3. parentheses",
       ans4: "4. square brackets",
-      answer: "2"
+      answer: "2",
     },
     {
       question: "Arrays in JavaScript can be used to store ______.",
@@ -40,7 +40,7 @@ var questions = [
       ans2: "2. other arrays",
       ans3: "3. booleans",
       ans4: "4. all of the above",
-      answer: "4"
+      answer: "4",
     },
     {
       question: "String values must be enclosed within ______ when being assigned to variables.",
@@ -48,7 +48,7 @@ var questions = [
       ans2: "2. curly brackets",
       ans3: "3. quotes",
       ans4: "4. parentheses",
-      answer: "3"
+      answer: "3",
     },
     {
       question: "A very useful tool used during development and debugging for printing content to the debugger is:",
@@ -56,7 +56,7 @@ var questions = [
       ans2: "2. Terminal/Bash",
       ans3: "3. for loops",
       ans4: "4. console.log",
-      answer: "1"
+      answer: "1",
     }
   ];
 
@@ -81,7 +81,7 @@ function startTimer(){
     }, 1000);
   }
 
-
+//this will get my questions started on the start button click 
 function testEvent(event) {
     if (event.target.matches("button"))
     event.preventDefault();
@@ -109,7 +109,7 @@ function clearEvent(event) {
 var submitScore = document.createElement("INPUT");
 submitScore.setAttribute("type", "submit");
 
-
+//this is linked to my top nav bar link to display the highscore page
 function highscoreDisplay(){
   get("highscorescard").style.display="block";
   get("intro").style.display="none";
@@ -117,32 +117,32 @@ function highscoreDisplay(){
   clearInterval(downloadTimer);
 }
 
-
-  //its reading this function, its jut not working how I want it to when I click submit on that form. need to work on that.
+//this is storing my scores and bringing me to highscore form my question card
   function highscore() {
-    console.log("Jac this is working");
     alert("Submit button clicked!");
-    //adding new score to local storage name  and score
-    localStorage.setItem((get("inlineFormInput").value), timeleft);
     
+    //making my name and score an object 
+    var highscoreNames = get("inlineFormInput").value.trim() +timeleft
+    
+    //setting name and score to local storage 
+    localStorage.setItem("highscoreLeaders", highscoreNames); 
+    
+   // function renderhighscoreLeaders(){
+     // .innerhtml = "";
+      //.textContent = .length; 
+   // }
     //grabs all the names and scores from local storage
-    for (var i=0; i<localstroage.length; i++) {
-      var key = localStorage.key(i);
-      var value =localStorage[key]; 
-      alert(key + " => " + value);
-      get("name").innerHTML = key; 
-      get("nameappend").innerHTML =value; 
-    }
+   // for (var i=0; i<localstroage.length; i++) {
+     // var key = localStorage.key(i);
+      
+      li.textContent = localStorage.getItem("highscoreLeaders", highscoreNames);  
+      li.setAttribute(highscoreNames);
+     // var value =localStorage[key]; 
+     // alert(key + " => " + value);
+     // get("name").innerHTML = key; 
+     // get("nameappend").innerHTML = value; 
     
-    highscoreDisplay();
-
-   // if (clicked_id === true){
-   // get("name").innerHTML = final;
-    // get("highscorescard").style.display="block";
-    // get("intro").style.display="none";
-    // get("questionbox").style.display="none";
-
-    // return true;
+    highscoreDisplay();    
   }
 
 //Getting my quiz in the correct order and linking the answers to varibles
@@ -152,7 +152,7 @@ function renderQuestion(){
       // resets the variable to allow users to restart the test
       clearInterval(downloadTimer);
       get("countdown").innerHTML = "Time: " +timeleft;
-      test.innerHTML = "<h2>Your score is: " +timeleft + "<br> "+correct+" of "+questions.length+" questions correct</h2><br><form id='submitScore'><div class='form-row align-items-center'><div class='col-auto'><label class='sr-only' for='inlineFormInput'>Enter Initials: </label><input type='text' class='form-control mb-2' id='inlineFormInput'></div><div class='col-auto'><button type='submit' class='btn btn-primary mb-2' id='submitBtn' onclick='highscore()'>Submit</button></div></div></form>"
+      test.innerHTML = "<h2>Your score is: " +timeleft + "<br>" +" Enter Intials: <form id='submitScore'><div class='form-row align-items-center'><div class='col-auto'><label class='sr-only' for='inlineFormInput'>Enter Initials: </label><input type='text' class='form-control mb-2' id='inlineFormInput'></div><div class='col-auto'><button type='submit' class='btn btn-info mb-2' id='submitBtn' onclick='highscore()'>Submit</button></div></div></form>"
       pos = 0;
       correct = 0;
       // stops rest of renderQuestion function running when test is completed
@@ -183,11 +183,10 @@ function renderQuestion(){
       correct++;
     }
     else{
-    //  correct--;
+      correct--;
       (timeleft = timeleft - 20);
       get("countdown").innerHTML = "Time: " +timeleft;
     }
-    //alert(questions[pos].answer);
     pos++;
     console.log(correct);
     renderQuestion();
@@ -201,8 +200,9 @@ function renderQuestion(){
   window.addEventListener("load", renderQuestion);
 
   //clears all my scores
-  var clearBtn = get("clear");
-  clearBtn.addEventListener("click", clearEvent);
+  //var clearBtn = get("clear");
+  //clearBtn.addEventListener("click", clearEvent);
+  //var clearButton = document.getElementById("clear", clearScores());
   
   //listens to back button on highscore card to go back to start 
   var backBtn = get("goback");
@@ -212,7 +212,10 @@ function renderQuestion(){
   var highscoreCard = document.getElementById("higscorecard");
   var highscoreList = document.getElementById("highsorelist");
   
-  var clearButton = document.getElementById("clear", clearScores());
+  
+  var li = document.getElementById("nameappend");
+  
+  //var clearButton = document.getElementById("clear", clearScores());
 
 /*
 Varibles Needed:
