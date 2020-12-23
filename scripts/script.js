@@ -1,21 +1,21 @@
-//used to say what position the user is at in the test 
-var pos = 0; 
-//stores answers correct 
-var correct = 0; 
-var timeleft; 
+//used to say what position the user is at in the test
+var pos = 0;
+//stores answers correct
+var correct = 0;
+var timeleft;
 var score = timeleft;
-var downloadTimer; 
+var downloadTimer;
 //test question and answer
 var test;
 //will refrence my question and choices
-var question; 
-var choice; 
-var choices; 
-//answers that the user will see as poitions to pick from 
+var question;
+var choice;
+var choices;
+//answers that the user will see as poitions to pick from
 var uAns1;
-var uAns2; 
-var uAns3; 
-var uAns4; 
+var uAns2;
+var uAns3;
+var uAns4;
 //question and answer array
 var questions = [
     {
@@ -40,7 +40,7 @@ var questions = [
       ans2: "2. other arrays",
       ans3: "3. booleans",
       ans4: "4. all of the above",
-      answer: "4" 
+      answer: "4"
     },
     {
       question: "String values must be enclosed within ______ when being assigned to variables.",
@@ -59,16 +59,16 @@ var questions = [
       answer: "1"
     }
   ];
- 
+
 
 //Function created so I dont have to write getElementById a bunch of times
 function get (x) {
-    return document.getElementById(x); 
+    return document.getElementById(x);
   }
 
-//Function to trigger on start 
+//Function to trigger on start
 function startTimer(){
-  //countdown to be modfiied 
+  //countdown to be modfiied
    timeleft = 100;
     downloadTimer = setInterval(function(){
       if(timeleft <= 0){
@@ -90,6 +90,21 @@ function testEvent(event) {
     startTimer();
 }
 
+//brings back to start of the quiz
+function backEvent(event) {
+  window.location.reload();
+}
+
+//function to clear highscore list 
+function clearEvent(event) {
+  event.preventDefault();
+  localStorage.clear();
+  get("name").innerHTML = localStorage.getItem("lastname");
+  get("highscorescard").style.display="block";
+  get("intro").style.display="none";
+  get("questionbox").style.display="none";
+}
+
 //score button prep
 var submitScore = document.createElement("INPUT");
 submitScore.setAttribute("type", "submit");
@@ -97,98 +112,40 @@ submitScore.setAttribute("type", "submit");
 
 function highscoreDisplay(){
   get("highscorescard").style.display="block";
-  get("intro").style.display="none"; 
-  get("questionbox").style.display="none"; 
+  get("intro").style.display="none";
+  get("questionbox").style.display="none";
   clearInterval(downloadTimer);
 }
 
 
-  //its reading this function, its jut not working how I want it to when I click submit on that form. need to work on that. 
+  //its reading this function, its jut not working how I want it to when I click submit on that form. need to work on that.
   function highscore() {
     console.log("Jac this is working");
     alert("Submit button clicked!");
-    alert()
-  
+    //adding new score to local storage name  and score
+    localStorage.setItem((get("inlineFormInput").value), timeleft);
+    
+    //grabs all the names and scores from local storage
+    for (var i=0; i<localstroage.length; i++) {
+      var key = localStorage.key(i);
+      var value =localStorage[key]; 
+      alert(key + " => " + value);
+      get("name").innerHTML = key; 
+      get("nameappend").innerHTML =value; 
+    }
+    
+    highscoreDisplay();
+
    // if (clicked_id === true){
-   // get("name").innerHTML = final; 
+   // get("name").innerHTML = final;
     // get("highscorescard").style.display="block";
-    // get("intro").style.display="none"; 
+    // get("intro").style.display="none";
     // get("questionbox").style.display="none";
-   
+
     // return true;
   }
 
-
-  //my highscore storage functions
-  var highScoreInput = document.querySelector("#highScore-text");
-  var highScoreForm = document.querySelector("#highScore-form");
-  var highScoreList = document.querySelector("#highScore-list");
-  var highScoresSpan = document.querySelector("#highScore-count");
-  var highScores = [];
-  
-  init();
-  
-    function renderHighScore() {
-    // Clear todoList element and update todoCountSpan
-    highScoreList.innerHTML = "";
-    highScoresSpan.textContent = highScores.length;
-  
-    // Render a new li for each todo
-      for (var i = 0; i < highScores.length; i++) {
-      var highScore = highScores[i];
-  
-      var li = document.createElement("li");
-      li.textContent = highScore;
-      li.setAttribute("data-index", i);
-  
-      var button = document.createElement("button");
-      button.textContent = "Clear Name";
-  
-      li.appendChild(button);
-      highScoreList.appendChild(li);
-    }
-  }
-  
-  function init() {
-    var storedhighScore = JSON.parse(localStorage.getItem("highScore"));
-    if (storedhighScore !== null) {
-      highScore = storedhighScore;
-    }
-    renderHighScore();
-  }
-  
-  function storeHighScore() {
-    localStorage.setItem("highScores", JSON.stringify(highScores));
-  }
-  
-  document.querySelector("#highScore-text").addEventListener("submit", function(event) {
-    event.preventDefault();
-  
-    var highScoreText = highScoreInput.value.trim();
-    if (highScoreText === "") {
-      return;
-    }
-  
-    highScores.push(highScoreText);
-    highScoreInput.value = "";
-    storeHighScore();
-    renderHighScore();
-  });
-  
-  highScoreList.addEventListener("click", function(event) {
-    var element = event.target
-  
-  if (element.matches("button") === true) {
-    var index = element.parentElement.getAttribute("data-index");
-     highScores.splice(index, 1);
-    storeHighScore();
-    renderHighScore();
-   }
-  });
-
-
-
-//Getting my quiz in the correct order and linking the answers to varibles 
+//Getting my quiz in the correct order and linking the answers to varibles
 function renderQuestion(){
     test = get("test");
     if(pos >= questions.length){
@@ -210,83 +167,85 @@ function renderQuestion(){
     // display the question
     test.innerHTML = "<h3>"+question+"</h3><br><br>";
     //Display the answer options
-    //this.id calls out the button value inside the check answer function. 
-    //id='x' matches the answer: x in the object to check 
-    //uAns1 - gives the visual of what the answer is, but the id assigns the value to that button 
-    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='1'>" +uAns1+ "</button><br><br>"; 
-    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='2'>" +uAns2+ "</button><br><br>"; 
-    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='3'>" +uAns3+ "</button><br><br>"; 
-    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='4'>" +uAns4+ "</button><br>"; 
+    //this.id calls out the button value inside the check answer function.
+    //id='x' matches the answer: x in the object to check
+    //uAns1 - gives the visual of what the answer is, but the id assigns the value to that button
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='1'>" +uAns1+ "</button><br><br>";
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='2'>" +uAns2+ "</button><br><br>";
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='3'>" +uAns3+ "</button><br><br>";
+    test.innerHTML += "<button type='button' class='btn btn-info' onclick='checkAnswer(this.id)' id='4'>" +uAns4+ "</button><br>";
   }
- 
-    //this checks whatever button was clicked value and provides a response based on array/object positions 
+
+    //this checks whatever button was clicked value and provides a response based on array/object positions
     function checkAnswer (clicked_id){
     choice = clicked_id;
     if (choice == questions[pos].answer){
       correct++;
     }
-    else{ 
+    else{
     //  correct--;
-      (timeleft = timeleft - 20); 
+      (timeleft = timeleft - 20);
       get("countdown").innerHTML = "Time: " +timeleft;
     }
     //alert(questions[pos].answer);
     pos++;
     console.log(correct);
-    renderQuestion(); 
+    renderQuestion();
   }
 
-  
-  get("questionbox").style.display="none";//hidden questions card 
-  get("highscorescard").style.display="none";//hidden highscores card 
-  
-  var gobackBtn = get("goback");
+  get("questionbox").style.display="none";//hidden questions card
+  get("highscorescard").style.display="none";//hidden highscores card
 
-  var startBtn = get("start"); 
+  var startBtn = get("start");
   startBtn.addEventListener("click", testEvent);
   window.addEventListener("load", renderQuestion);
 
+  //clears all my scores
+  var clearBtn = get("clear");
+  clearBtn.addEventListener("click", clearEvent);
+  
+  //listens to back button on highscore card to go back to start 
+  var backBtn = get("goback");
+  backBtn.addEventListener("click", backEvent);
+  
   //will need to be pulled from submit
   var highscoreCard = document.getElementById("higscorecard");
   var highscoreList = document.getElementById("highsorelist");
+  
   var clearButton = document.getElementById("clear", clearScores());
-  function clearScores() {
-    if (clearButton === true){
-      highscoreInput.appendChild(td)=" ";
-    }
-  };
+
 /*
 Varibles Needed:
-position to show current postion 
-number correct 
+position to show current postion
+number correct
 var to html: test and test status
-question 
+question
 choice options
-choices 
-for each answer 
+choices
+for each answer
 
 Array with objects needed:
     Question: gives the question
-    ans1: gives the answers 
+    ans1: gives the answers
     ans2
     ans3
     ans4
-    answer: gives actual answer to refrence 
+    answer: gives actual answer to refrence
 
 
-function to refrence how to return elements to the document 
+function to refrence how to return elements to the document
 
 function for rendering the question with the answers
-each answer will be a button linked with an id for a value to match the answer in the array 
+each answer will be a button linked with an id for a value to match the answer in the array
 
-function to check answer 
+function to check answer
 
 re-render question
 
 
 will need a start screen before
 a score page
-a highscore list 
-store to local storage 
-able to clear socres on local storage and navigate back to start 
+a highscore list
+store to local storage
+able to clear socres on local storage and navigate back to start
 */

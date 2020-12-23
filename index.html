@@ -69,19 +69,22 @@
                 </div>
               </section>
             </header>
-            <div class="highScore">
-              <form id="highScore-form" method="POST">
-                <label for="highScore-text">Enter Intials and Score </label>
-                <input type="text" name="highScore-text" id="highScore-text" />
-              </form>
-              <p><span id="highScore-count">0</span> people have logged their JavaScript Fundamentals Quiz Score </p>
-              <ul id="highScore-list"></ul>
-            </div>
+            <form class="card-body">
+              <section class="row">
+                <div class="col-12">
+
+                  <ul>
+                    <li id="name">Test</li>
+                    <li id="nameappend"></li>
+                  </ul>
+
+                  <button type="button" class="btn btn-info " id="goback">Go Back</button> <button type="button"
+                    class="btn btn-info " id="clear">Clear Scores</button>
+                </div>
               </section>
             </form>
           </section>
         </form>
-
   </main>
   <script src="./scripts/script.js"></script>
 
