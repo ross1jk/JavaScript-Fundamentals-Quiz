@@ -204,14 +204,14 @@ function renderQuestion(){
   
   var liDoc = document.getElementById("nameappend");
    //function to clear highscore list 
-  var clearButton = document.getElementById("clear", function (event) {
+ /* var clearButton = document.getElementById("clear", function (event) {
       event.preventDefault();
       localStorage.clear();
       get("nameappend").innerHTML = localStorage.getItem("highscoreLeaderboard");
       get("highscorescard").style.display="block";
       get("intro").style.display="none";
       get("questionbox").style.display="none";
-    }) 
+    }) /*
 /*
 Varibles Needed:
 position to show current postion
