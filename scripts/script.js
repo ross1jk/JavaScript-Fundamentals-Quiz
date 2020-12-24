@@ -106,32 +106,43 @@ function highscoreDisplay(){
   get("questionbox").style.display="none";
   clearInterval(downloadTimer);
 }
+/*function to clear highscore list 
+function clearEvent(event) {
+  event.preventDefault();
+  localStorage.clear();
+  var myList = document.getElementById("list");
+  myList.innerHTML = '';
+
+  get("highscorescard").style.display="block";
+  get("intro").style.display="none";
+  get("questionbox").style.display="none";
+} */
 
 //this is storing my scores and is supposed to bring me to my highscore form my question card
   function highscore() {
-    //This is putting my form input and the time left value together which is needed for my display form 
+    
     var highscoreNames ={
       User: get("inlineFormInput").value.trim(),
       score: timeleft
     }  
     //setting name and score to local storage 
-    localStorage.setItem("highscoreLeaderboard", highscoreNames.User +" - "+ JSON.stringify(highscoreNames.score)); 
+    localStorage.setItem(get("inlineFormInput").value.trim(), JSON.stringify(highscoreNames)); 
     
     //grabs one the name and score from local storage
-    liDoc.textContent = localStorage.getItem("highscoreLeaderboard", highscoreNames.User +" - "+ JSON.stringify(highscoreNames.score));
+    //liDoc.textContent = localStorage.getItem("User", JSON.stringify(highscoreNames.User) +" - "+ JSON.stringify(highscoreNames.score));
+    text = localStorage.getItem(localStorage.key(0));
+    obj = JSON.parse(text);
 
-    // Appends all the scores as list elements
-   /* for (var i = 0; i < displayHighScore.length; i++) {
-        var li = document.createElement('li');
-        li.textContent = highscoreNames; 
-        li.setAttribute = ("data-index", i); 
-        li.appendChild(liDoc); 
-    } */
-    
-     //liDoc is new var for the setting to the page 
+     for (var i = 0; i < localStorage.length; i++){
+      var ul = document.getElementById("list");
+      var li = document.createElement("li");
+      text = localStorage.getItem(localStorage.key(i));
+      obj = JSON.parse(text);
+      li.appendChild(document.createTextNode(obj.User + ' - ' + obj.score));
+      ul.appendChild(li);
+    }
     
     highscoreDisplay();   
-
   }
 
 //Getting my quiz in the correct order and linking the answers to varibles
@@ -187,11 +198,6 @@ function renderQuestion(){
   var startBtn = get("start");
   startBtn.addEventListener("click", testEvent);
   window.addEventListener("load", renderQuestion);
-
-  //clears all my scores
-  //var clearBtn = get("clear");
-  //clearBtn.addEventListener("click", clearEvent);
-  //var clearButton = document.getElementById("clear", clearScores());
   
   //listens to back button on highscore card to go back to start 
   var backBtn = get("goback");
@@ -200,18 +206,8 @@ function renderQuestion(){
   //will need to be pulled from submit
   var highscoreCard = document.getElementById("higscorecard");
   var highscoreList = document.getElementById("highsorelist");
-  
-  
   var liDoc = document.getElementById("nameappend");
-   //function to clear highscore list 
- /* var clearButton = document.getElementById("clear", function (event) {
-      event.preventDefault();
-      localStorage.clear();
-      get("nameappend").innerHTML = localStorage.getItem("highscoreLeaderboard");
-      get("highscorescard").style.display="block";
-      get("intro").style.display="none";
-      get("questionbox").style.display="none";
-    }) /*
+
 /*
 Varibles Needed:
 position to show current postion
