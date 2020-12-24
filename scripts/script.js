@@ -106,8 +106,8 @@ function highscoreDisplay(){
   get("questionbox").style.display="none";
   clearInterval(downloadTimer);
 
-  text = localStorage.getItem(localStorage.key(0));
-  obj = JSON.parse(text);
+  var myList = document.getElementById("list");
+  myList.innerHTML = ''
 
    for (var i = 0; i < localStorage.length; i++){
     var ul = document.getElementById("list");
