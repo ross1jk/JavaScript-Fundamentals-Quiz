@@ -106,8 +106,8 @@ function highscoreDisplay(){
   get("questionbox").style.display="none";
   clearInterval(downloadTimer);
 
-  var myList = document.getElementById("list");
-  myList.innerHTML = ''
+   var myList = document.getElementById("list");
+   myList.innerHTML = ''
 
    for (var i = 0; i < localStorage.length; i++){
     var ul = document.getElementById("list");
