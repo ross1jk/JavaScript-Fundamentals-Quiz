@@ -106,17 +106,7 @@ function highscoreDisplay(){
   get("questionbox").style.display="none";
   clearInterval(downloadTimer);
 }
-/*function to clear highscore list 
-function clearEvent(event) {
-  event.preventDefault();
-  localStorage.clear();
-  var myList = document.getElementById("list");
-  myList.innerHTML = '';
 
-  get("highscorescard").style.display="block";
-  get("intro").style.display="none";
-  get("questionbox").style.display="none";
-} */
 
 //this is storing my scores and is supposed to bring me to my highscore form my question card
   function highscore() {
@@ -203,6 +193,21 @@ function renderQuestion(){
   var backBtn = get("goback");
   backBtn.addEventListener("click", backEvent);
   
+  //function to clear highscore list 
+  var clearBtn = get("clear");
+  clearBtn.addEventListener("click", clearEvent);
+  
+  function clearEvent(event) {
+  event.preventDefault();
+  localStorage.clear();
+  var myList = document.getElementById("list");
+  myList.innerHTML = '';
+
+  get("highscorescard").style.display="block";
+  get("intro").style.display="none";
+  get("questionbox").style.display="none";
+ } 
+
   //will need to be pulled from submit
   var highscoreCard = document.getElementById("higscorecard");
   var highscoreList = document.getElementById("highsorelist");
