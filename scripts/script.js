@@ -105,8 +105,19 @@ function highscoreDisplay(){
   get("intro").style.display="none";
   get("questionbox").style.display="none";
   clearInterval(downloadTimer);
-}
 
+  text = localStorage.getItem(localStorage.key(0));
+  obj = JSON.parse(text);
+
+   for (var i = 0; i < localStorage.length; i++){
+    var ul = document.getElementById("list");
+    var li = document.createElement("li");
+    text = localStorage.getItem(localStorage.key(i));
+    obj = JSON.parse(text);
+    li.appendChild(document.createTextNode(obj.User + ' - ' + obj.score));
+    ul.appendChild(li);
+  }
+}
 
 //this is storing my scores and is supposed to bring me to my highscore form my question card
   function highscore() {
@@ -120,17 +131,7 @@ function highscoreDisplay(){
     
     //grabs one the name and score from local storage
     //liDoc.textContent = localStorage.getItem("User", JSON.stringify(highscoreNames.User) +" - "+ JSON.stringify(highscoreNames.score));
-    text = localStorage.getItem(localStorage.key(0));
-    obj = JSON.parse(text);
-
-     for (var i = 0; i < localStorage.length; i++){
-      var ul = document.getElementById("list");
-      var li = document.createElement("li");
-      text = localStorage.getItem(localStorage.key(i));
-      obj = JSON.parse(text);
-      li.appendChild(document.createTextNode(obj.User + ' - ' + obj.score));
-      ul.appendChild(li);
-    }
+ 
     
     highscoreDisplay();   
   }
